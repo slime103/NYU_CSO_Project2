@@ -4,16 +4,16 @@
 #include "bst.h"
 
 int main() {
-    
-    
+
+
 	bst_node * root = NULL;
-	
-    
+
+
     char * instruction = (char*) malloc(256*sizeof(char) ) ;
-    char * word = NULL; 
-    
+    char * word = NULL;
+
     while ( scanf("%s", instruction) > 0 ) {
-        //printf ( "read: %c\n", instruction); 
+        //printf ( "read: %c\n", instruction);
         if ( strncmp(instruction,"a", 2) == 0 ) {
             //add a value to the tree
             word = (char*) malloc (256 * sizeof(char) );
@@ -21,21 +21,21 @@ int main() {
             add(&root, word);
         }
         else if ( strncmp(instruction,"s", 2) == 0 ) {
-            //remove the smallest value in the tree 
+            //remove the smallest value in the tree
             word = removeSmallest( &root);
             //free memory that was allocated for the word
             if (word != NULL) {
                 free(word);
-                word = NULL; 
+                word = NULL;
             }
         }
         else if ( strncmp(instruction,"l", 2) == 0 ){
-            //remove the largest value in the tree 
+            //remove the largest value in the tree
             word = removeLargest( &root);
             //free memory that was allocated for the word
             if (word != NULL) {
                 free(word);
-                word = NULL; 
+                word = NULL;
             }
         }
         else if ( strncmp(instruction,"p", 2) == 0 ){
@@ -43,20 +43,24 @@ int main() {
             inorder ( root );
             printf ( "\n");
         }
+        else if ( strncmp(instruction,"q", 2) == 0 ){
+            //exit
+            break;
+        }
         else {
             printf ("Error: %s is not a valid instruction\n", instruction);
         }
-        
+
     }
-	
+
     if (word != NULL) {
         free(word);
-        word = NULL; 
+        word = NULL;
     }
-	
+
     if (instruction != NULL) {
         free(instruction);
-        instruction = NULL; 
+        instruction = NULL;
     }
 
 	return 0;
